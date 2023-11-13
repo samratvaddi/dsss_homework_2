@@ -1,12 +1,10 @@
 import random
 
-
 def integer(minimum, maximum):
     """
     Generate a random integer within the range
     """
-    return random.randint(min, max)
-
+    return random.randint(minimum, maximum)
 
 def operation():
     """
@@ -14,18 +12,18 @@ def operation():
     """
     return random.choice(['+', '-', '*'])
 
-
-def solution(num1, num2, operation):
+def solution(num1, num2, operator):
     """
     Calculate the result of an arithmetic operation.
     """
-  if operator == '+':
+    if operator == '+':
         result = num1 + num2
     elif operator == '-':
         result = num1 - num2
-    else:
+    else: 
         result = num1 * num2
-    return result
+    question = f"{num1} {operator} {num2}"
+    return question, result
 
 def math_quiz():
     """
@@ -38,7 +36,7 @@ def math_quiz():
     print("You will be presented with math problems, and you need to provide the correct answers.")
 
     for _ in range(total_number_questions):
-       num1 = integer(1, 10)
+        num1 = integer(1, 10)
         num2 = integer(1, 5)
         operator = operation()
 
@@ -48,8 +46,8 @@ def math_quiz():
         try:
             user_solution = int(input("Your answer: "))
         except ValueError:
-            print("Wrong input, please enter a valid input.")
-            user_solution = 0
+            print("Wrong input, please enter a valid number.")
+            continue  
 
         if user_solution == correct_solution:
             print("Correct! You earned a point.")
@@ -59,5 +57,4 @@ def math_quiz():
 
     print(f"\nGame over! Your score is: {score}/{total_number_questions}")
 
-if __name__ == "__main__":
-    math_quiz()
+math_quiz()

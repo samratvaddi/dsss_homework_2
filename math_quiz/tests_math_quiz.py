@@ -1,34 +1,32 @@
 import unittest
 from math_quiz import integer, operation, solution
 
-class TestMathQuizFunctions(unittest.TestCase):
+class TestMathGame(unittest.TestCase):
 
     def test_integer(self):
-        # Test if random numbers generated are within the range
         min_val = 1
         max_val = 10
-        for _ in range(1000):  # Test a large number of random values
+        for _ in range(1000):  
             rand_num = integer(min_val, max_val)
             self.assertTrue(min_val <= rand_num <= max_val)
 
     def test_operation(self):
-        # Test if the random operator is one of the operators
-        operators = {'+', '-', '*'}
-        for _ in range(1000):  # Test a large number of random values
-            rand_operator = operation()
-            self.assertTrue(rand_operator in operators)
+        valid_operators = {'+', '-', '*'}
+        for _ in range(1000):  
+            operator = operation()
+            self.assertIn(operator, valid_operators)
 
     def test_solution(self):
         test_cases = [
-            (5, 2, '+', 7),
-            (3, 4, '-', -1),
-            (2, 6, '*', 12),
-            # Add more test cases as needed
+            (5, 2, '+', '5 + 2', 7),
+            (10, 3, '-', '10 - 3', 7),
+            (4, 5, '*', '4 * 5', 20),
+            (20, 4, '/', '20 / 4', 5),
         ]
 
-        for num1, num2, operator, expected_answer in test_cases:
-            calculated_answer = solution(num1, num2, operator)
-            self.assertEqual(calculated_answer, expected_answer)
+        for num1, num2, operator, expected_problem, expected_answer in test_cases:
+            _, result_answer = solution(num1, num2, operator)  
+            self.assertEqual(result_answer, expected_answer)
 
 if __name__ == "__main__":
     unittest.main()
